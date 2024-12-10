@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: foo
+  labels:
+    app.kubernetes.io/name: foo
+spec:
+  containers:
+  - name: foo
+    image: hashicorp/http-echo:0.2.3
+    args:
+    - "-text=foo"
+    ports:
+    - containerPort: 5678 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: foo-service
+spec:
+  selector:
+    app.kubernetes.io/name: foo
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5678
+      nodePort: 30000
+  type: NodePort
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bar
+  labels:
+    app.kubernetes.io/name: bar
+spec:
+  containers:
+  - name: bar
+    image: hashicorp/http-echo:0.2.3
+    args:
+    - "-text=bar"
+    ports:
+    - containerPort: 5679
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: bar-service
+spec:
+  selector:
+    app.kubernetes.io/name: bar
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5678
+      nodePort: 30001
+  type: NodePort
