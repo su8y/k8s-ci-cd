@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: foo
+  labels:
+    app: foo
+spec:
+  selector:
+    app: foo
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: http-foo
+      nodePort: 30000
+  type: NodePort

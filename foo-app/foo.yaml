@@ -1,0 +1,32 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: foo
+  labels:
+    app: foo
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: foo
+  template:
+    metadata:
+      labels:
+        app: foo
+    spec:
+      containers:
+        - name: foo
+          image: hashicorp/http-echo:0.2.3
+          ports:
+            - name: http-foo
+              containerPort: 5678
+          args:
+            - "-text=foo"
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
