@@ -4,14 +4,17 @@ services:
     image: gitlab/gitlab-ee:17.4.6-ee.0
     container_name: gitlab
     restart: always
-    hostname: "gitlab.example.com"
+    hostname: "gitlab"
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url '192.168.4.44:8929
+        letsencrypt['enable'] = false
+        external_url "http://192.168.4.44:8929"
+        nginx['listen_https'] = false
+        nginx['listen_port'] = 80
+        # nginx['redirect_http_to_https'] = true
     ports:
       - "8929:80"
       - "443:443"
-      - "2424:22"
     volumes:
       - "$GITLAB_HOME/config:/etc/gitlab"
       - "$GITLAB_HOME/logs:/var/log/gitlab"

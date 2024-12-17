@@ -23,6 +23,9 @@ spec:
               containerPort: 5678
           args:
             - "-text=foo"
+          envFrom:
+            - configMapRef:
+                name: database-setting2
           resources:
             limits:
               memory: "512Mi"

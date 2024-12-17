@@ -26,3 +26,12 @@ spec:
             name: foo
             port:
               number: 80
+  - http:
+      paths:
+      - pathType: Prefix  # /demo/로 시작하는 모든 경로에 매칭
+        path: /demo/
+        backend:          # demo 서비스의 80포트로 포워딩
+          service:
+            name: demo
+            port:
+              number: 80

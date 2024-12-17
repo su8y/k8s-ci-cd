@@ -1,0 +1,9 @@
+gitlabUrl: http://192.168.4.44:8929
+runnerRegistrationToken: glrt-RUFDkh9xRrbzPXpvrXZ9 
+
+rbac:
+  create: true
+
+serviceAccount:
+  create: false
+  name: gitlab-runner-sa
